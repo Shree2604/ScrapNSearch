@@ -42,7 +42,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/Shree/ScrapNSearch.git
+git clone https://github.com/Shree2604/ScrapNSearch.git
 cd ScrapNSearch
 
 # Create virtual environment (recommended)
