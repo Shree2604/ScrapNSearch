@@ -1,0 +1,42 @@
+# Level 4: Social Media Analysis - Correct Answers
+
+1. User Activity Summary:
+   - Total Posts: 127
+   - Active Users: 42
+   - Average Posts per User: 3.02
+   - Most Active User: "@tech_enthusiast" with 18 posts
+
+2. Engagement Metrics:
+   - Average Engagement Rate: 4.8%
+   - Most Engaging Post: "Just launched our new product! Check it out at example.com/new-product #tech #launch" with 1,248 interactions
+   - Average Interactions per Post:
+     - Likes: 142.5
+     - Comments: 23.8
+     - Shares: 18.3
+
+3. Content Analysis:
+   - Total Hashtags: 1,845
+   - Top 5 Trending Hashtags:
+     1. #tech (248)
+     2. #programming (187)
+     3. #webdev (156)
+     4. #python (142)
+     5. #javascript (128)
+   - Post Types:
+     - Text: 38.5%
+     - Image: 45.7%
+     - Video: 12.6%
+     - Other: 3.2%
+
+4. Temporal Analysis:
+   - Peak Activity Hours: 7PM - 9PM
+   - Posts by Time of Day:
+     - Morning (6AM-12PM): 18.9%
+     - Afternoon (12PM-5PM): 31.2%
+     - Evening (5PM-10PM): 42.7%
+     - Night (10PM-6AM): 7.2%
+
+5. User Interactions:
+   - Total Comments: 3,023
+   - Most Active Commenter: "@code_reviewer" with 147 comments
+   - Post with Most Discussion: "What's your favorite programming language and why?" with 328 comments

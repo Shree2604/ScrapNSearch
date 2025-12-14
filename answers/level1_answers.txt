@@ -1,0 +1,19 @@
+# Level 1: Movie Data - Correct Answers
+
+1. Highest Rated Movie(s):
+   - "Oppenheimer"
+   - "The Dark Knight"
+
+2. Movies released after 2020:
+   - 2
+
+3. Movies with rating > 8.5:
+   - "Inception"
+   - "Oppenheimer"
+   - "The Dark Knight"
+
+4. Most common genre:
+   - "Sci-Fi"
+
+5. Director with most movies:
+   - "Christopher Nolan"

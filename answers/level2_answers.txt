@@ -1,0 +1,30 @@
+# Level 2: News Articles - Correct Answers
+
+1. Total Articles: 8
+
+2. Article Metadata (first 2 as example):
+   - Title: "Global Tech Summit 2023: Key Announcements"
+     Date: "2023-11-15"
+     Author: "Sarah Johnson"
+     Comments: 42
+     Reading Time: "5 min"
+   - Title: "New Study Reveals Benefits of Mediterranean Diet"
+     Date: "2023-11-14"
+     Author: "Michael Chen"
+     Comments: 28
+     Reading Time: "4 min"
+
+3. Articles by Category:
+   - Technology: 3
+   - Health: 2
+   - Business: 2
+   - Science: 1
+
+4. Top 3 Tags:
+   - technology: 5
+   - health: 4
+   - research: 3
+
+5. Featured Images (first 2 as example):
+   - "Global Tech Summit 2023: Key Announcements": "/images/tech-summit.jpg"
+   - "New Study Reveals Benefits of Mediterranean Diet": "/images/med-diet.jpg"
