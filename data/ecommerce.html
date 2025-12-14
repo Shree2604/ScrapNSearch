@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Premium Electronics</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f6fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .search-cart {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .cart-icon {
+            color: white;
+            font-size: 1.5em;
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+            background-color: #f8f9fa;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .dropdown-menu a {
+            padding: 10px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.2em;
+            max-width: 700px;
+            margin: 0 auto 25px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 10px;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--accent);
+        }
+        
+        /* Products Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 2em;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .section-title p {
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .product-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .product-description {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .current-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        .original-price {
+            font-size: 0.9em;
+            color: #95a5a6;
+            text-decoration: line-through;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stars {
+            color: #f1c40f;
+            margin-right: 5px;
+        }
+        
+        .rating-count {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-left: 5px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #333;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            padding: 0;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: #ecf0f1;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9em;
+            color: #95a5a6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                display: none;
+                box-shadow: none;
+            }
+            
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Tech<span>Store</span></a>
+                <div class="search-cart">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search products...">
+                    </div>
+                    <a href="#" class="cart-icon">
+                        🛒
+                        <span class="cart-count">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Categories ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Smartphones</a></li>
+                        <li><a href="#">Laptops</a></li>
+                        <li><a href="#">Tablets</a></li>
+                        <li><a href="#">Wearables</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Deals</a></li>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Trending</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to TechStore</h1>
+            <p>Discover the latest gadgets and electronics at unbeatable prices. Free shipping on orders over $50!</p>
+            <div>
+                <a href="#featured" class="btn">Shop Now</a>
+                <a href="#categories" class="btn btn-outline">Browse Categories</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Products -->
+    <section class="container" id="featured">
+        <div class="section-title">
+            <h2>Featured Products</h2>
+            <p>Check out our handpicked selection of premium tech products</p>
+        </div>
+        
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/300x300" alt="Smartphone X">
+                    <span class="product-badge">Hot</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Smartphones</div>
+                    <h3 class="product-title">Quantum X Pro 5G</h3>
+                    <p class="product-description">Experience lightning-fast performance with the all-new Quantum X Pro 5G. Featuring a 6.7" AMOLED display and 108MP camera.</p>
+                    <div class="product-price">
+                        <span class="current-price">$899.99</span>
+                        <span class="original-price">$999.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-count">(128)</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <button class="btn btn-secondary">❤</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/300x300" alt="Laptop">
+                    <span class="product-badge" style="background-color: #2ecc71;">New</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Laptops</div>
+                    <h3 class="product-title">UltraBook Pro X1</h3>
+                    <p class="product-description">Sleek and powerful laptop with 11th Gen Intel Core i7 processor, 16GB RAM, and 1TB SSD storage.</p>
+                    <div class="product-price">
+                        <span class="current-price">$1,299.99</span>
+                        <span class="original-price">$1,499.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">★★★★☆</div>
+                        <span class="rating-count">(87)</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <button class="btn btn-secondary">❤</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/300x300" alt="Smartwatch">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Wearables</div>
+                    <h3 class="product-title">FitPro 5 Smartwatch</h3>
+                    <p class="product-description">Track your fitness goals with the advanced health monitoring features of the FitPro 5. Waterproof and 14-day battery life.</p>
+                    <div class="product-price">
+                        <span class="current-price">$199.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-count">(256)</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <button class="btn btn-secondary">❤</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/300x300" alt="Wireless Earbuds">
+                    <span class="product-badge" style="background-color: #9b59b6;">Sale</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Audio</div>
+                    <h3 class="product-title">SoundBuds Pro</h3>
+                    <p class="product-description">Wireless earbuds with active noise cancellation and 30-hour battery life. Perfect for music lovers on the go.</p>
+                    <div class="product-price">
+                        <span class="current-price">$149.99</span>
+                        <span class="original-price">$199.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">★★★★☆</div>
+                        <span class="rating-count">(312)</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <button class="btn btn-secondary">❤</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Categories Section -->
+    <section class="container" id="categories" style="margin-top: 80px; margin-bottom: 80px;">
+        <div class="section-title">
+            <h2>Shop by Category</h2>
+            <p>Browse our wide range of product categories</p>
+        </div>
+        
+        <div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+            <!-- Category 1 -->
+            <a href="#" class="product-card" style="text-decoration: none; text-align: center;">
+                <div class="product-image" style="height: 150px; background-color: #e8f4f8;">
+                    <img src="https://via.placeholder.com/150" alt="Smartphones" style="max-height: 80px;">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title" style="margin: 0;">Smartphones</h3>
+                    <p style="color: #7f8c8d; font-size: 0.9em;">128 products</p>
+                </div>
+            </a>
+            
+            <!-- Category 2 -->
+            <a href="#" class="product-card" style="text-decoration: none; text-align: center;">
+                <div class="product-image" style="height: 150px; background-color: #f0f8e8;">
+                    <img src="https://via.placeholder.com/150" alt="Laptops" style="max-height: 80px;">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title" style="margin: 0;">Laptops</h3>
+                    <p style="color: #7f8c8d; font-size: 0.9em;">87 products</p>
+                </div>
+            </a>
+            
+            <!-- Category 3 -->
+            <a href="#" class="product-card" style="text-decoration: none; text-align: center;">
+                <div class="product-image" style="height: 150px; background-color: #fff8e1;">
+                    <img src="https://via.placeholder.com/150" alt="Tablets" style="max-height: 80px;">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title" style="margin: 0;">Tablets</h3>
+                    <p style="color: #7f8c8d; font-size: 0.9em;">64 products</p>
+                </div>
+            </a>
+            
+            <!-- Category 4 -->
+            <a href="#" class="product-card" style="text-decoration: none; text-align: center;">
+                <div class="product-image" style="height: 150px; background-color: #f9e8f0;">
+                    <img src="https://via.placeholder.com/150" alt="Wearables" style="max-height: 80px;">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title" style="margin: 0;">Wearables</h3>
+                    <p style="color: #7f8c8d; font-size: 0.9em;">92 products</p>
+                </div>
+            </a>
+            
+            <!-- Category 5 -->
+            <a href="#" class="product-card" style="text-decoration: none; text-align: center;">
+                <div class="product-image" style="height: 150px; background-color: #e8f8f0;">
+                    <img src="https://via.placeholder.com/150" alt="Accessories" style="max-height: 80px;">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title" style="margin: 0;">Accessories</h3>
+                    <p style="color: #7f8c8d; font-size: 0.9em;">156 products</p>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Special Offer Banner -->
+    <section class="container" style="margin-bottom: 80px;">
+        <div style="background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; padding: 40px; border-radius: 10px; text-align: center;">
+            <h2 style="margin-bottom: 15px; font-size: 2em;">Limited Time Offer!</h2>
+            <p style="font-size: 1.2em; margin-bottom: 25px; max-width: 700px; margin-left: auto; margin-right: auto;">Get 30% off on all accessories. Use code: <strong>ACCESS30</strong> at checkout.</p>
+            <a href="#" class="btn" style="background-color: white; color: #ff6b6b;">Shop Now</a>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="container" style="margin-bottom: 80px;">
+        <div class="section-title">
+            <h2>What Our Customers Say</h2>
+            <p>Don't just take our word for it - hear from our satisfied customers</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
+            <!-- Testimonial 1 -->
+            <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #e0e0e0; margin-right: 15px; overflow: hidden;">
+                        <img src="https://via.placeholder.com/50" alt="Customer" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <h4 style="margin: 0; color: var(--dark);">Alex Johnson</h4>
+                        <div class="stars" style="color: #f1c40f; font-size: 0.9em;">★★★★★</div>
+                    </div>
+                </div>
+                <p style="color: #555; font-style: italic; line-height: 1.6;">"The Quantum X Pro is simply amazing! The camera quality is outstanding and the battery life lasts me all day. Highly recommended!"</p>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #e0e0e0; margin-right: 15px; overflow: hidden;">
+                        <img src="https://via.placeholder.com/50" alt="Customer" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <h4 style="margin: 0; color: var(--dark);">Sarah Williams</h4>
+                        <div class="stars" style="color: #f1c40f; font-size: 0.9em;">★★★★★</div>
+                    </div>
+                </div>
+                <p style="color: #555; font-style: italic; line-height: 1.6;">"I bought the UltraBook Pro X1 for work and it's been a game-changer. Lightweight, powerful, and the battery lasts forever!"</p>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #e0e0e0; margin-right: 15px; overflow: hidden;">
+                        <img src="https://via.placeholder.com/50" alt="Customer" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <h4 style="margin: 0; color: var(--dark);">Michael Chen</h4>
+                        <div class="stars" style="color: #f1c40f; font-size: 0.9em;">★★★★☆</div>
+                    </div>
+                </div>
+                <p style="color: #555; font-style: italic; line-height: 1.6;">"Great selection of products and fast shipping. The FitPro 5 has helped me stay on track with my fitness goals. Would buy again!"</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter -->
+    <section style="background-color: #f8f9fa; padding: 60px 0; margin-bottom: 80px;">
+        <div class="container" style="max-width: 600px; text-align: center;">
+            <h2 style="margin-bottom: 15px; color: var(--dark);">Subscribe to Our Newsletter</h2>
+            <p style="color: #7f8c8d; margin-bottom: 25px;">Get the latest updates on new products, special offers, and tech news.</p>
+            <form style="display: flex; max-width: 500px; margin: 0 auto;">
+                <input type="email" placeholder="Enter your email" style="flex: 1; padding: 12px 15px; border: 1px solid #ddd; border-radius: 30px 0 0 30px; font-size: 1em; outline: none;">
+                <button type="submit" style="background-color: var(--accent); color: white; border: none; padding: 0 25px; border-radius: 0 30px 30px 0; cursor: pointer; font-weight: 600; transition: background-color 0.3s ease;">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About TechStore</h3>
+                    <p style="color: #bdc3c7; margin-bottom: 20px; line-height: 1.6;">Your one-stop shop for the latest and greatest in technology. We're committed to providing high-quality products at competitive prices.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Twitter">t</a>
+                        <a href="#" title="Instagram">i</a>
+                        <a href="#" title="YouTube">y</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>📱 +1 (555) 123-4567</li>
+                        <li>✉️ info@techstore.com</li>
+                        <li>📍 123 Tech Street, Silicon Valley, CA 94025</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 TechStore. All Rights Reserved. | <a href="#" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple JavaScript for dropdown menus on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('a');
+                
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown')) {
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialConnect - Your Social Network</title>
+    <style>
+        :root {
+            --primary: #1877f2;
+            --secondary: #42b72a;
+            --dark: #1c1e21;
+            --light: #f0f2f5;
+            --text: #050505;
+            --text-secondary: #65676b;
+            --card-bg: #ffffff;
+            --border: #dddfe2;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background-color: var(--card-bg);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .search-bar {
+            flex: 0.5;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border-radius: 20px;
+            border: none;
+            background-color: var(--light);
+            font-size: 0.95em;
+            outline: none;
+        }
+        
+        .search-bar::before {
+            content: '🔍';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1em;
+            opacity: 0.7;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.85em;
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+        
+        .nav-links i {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+        
+        .user-avatar:hover {
+            border-color: var(--primary);
+        }
+        
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        /* Left Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 70px;
+            height: calc(100vh - 90px);
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .sidebar-section {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .menu-item:hover {
+            background-color: var(--light);
+        }
+        
+        .menu-item i {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 1em;
+            color: var(--primary);
+        }
+        
+        .menu-item.active {
+            background-color: #e7f3ff;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .menu-item.active i {
+            background-color: #d8e7ff;
+        }
+        
+        .shortcut-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .shortcut-item:hover {
+            background-color: var(--light);
+        }
+        
+        .shortcut-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        /* Main Content */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .story-section {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+        
+        .stories {
+            display: flex;
+            gap: 10px;
+            padding: 5px 0;
+        }
+        
+        .story {
+            min-width: 100px;
+            width: 100px;
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .story.upload {
+            background-color: var(--light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border);
+        }
+        
+        .story.upload i {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .story.upload span {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+        }
+        
+        .story-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .story-user {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            font-weight: 500;
+            font-size: 0.8em;
+        }
+        
+        .create-post {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .post-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .post-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            background-color: var(--light);
+            border-radius: 20px;
+            font-size: 0.95em;
+            outline: none;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .post-action:hover {
+            background-color: var(--light);
+        }
+        
+        .post-action i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        
+        .post {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .post-user {
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .post-user-info h4 {
+            font-size: 0.95em;
+            margin: 0 0 3px 0;
+        }
+        
+        .post-time {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-time i {
+            margin-left: 5px;
+            font-size: 0.9em;
+        }
+        
+        .post-more {
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+        
+        .post-more:hover {
+            background-color: var(--light);
+        }
+        
+        .post-content {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .post-image {
+            width: 100%;
+            max-height: 500px;
+            border-radius: 8px;
+            margin: 10px 0;
+            object-fit: cover;
+        }
+        
+        .post-stats {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9em;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .post-action i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        
+        .post-action.liked {
+            color: #f5534d;
+        }
+        
+        .post-action.commented {
+            color: #1a73e8;
+        }
+        
+        .post-action.shared {
+            color: #31a24c;
+        }
+        
+        /* Right Sidebar */
+        .right-sidebar {
+            position: sticky;
+            top: 70px;
+            height: calc(100vh - 90px);
+            overflow-y: auto;
+            padding-left: 10px;
+        }
+        
+        .sponsor-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .sponsor-item:hover {
+            background-color: var(--light);
+        }
+        
+        .sponsor-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .sponsor-info h4 {
+            font-size: 0.9em;
+            margin: 0 0 3px 0;
+        }
+        
+        .sponsor-info p {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .birthday-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .birthday-item:hover {
+            background-color: var(--light);
+        }
+        
+        .birthday-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e7f3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 1.2em;
+        }
+        
+        .birthday-info h4 {
+            font-size: 0.9em;
+            margin: 0 0 3px 0;
+        }
+        
+        .birthday-info p {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .contact-item:hover {
+            background-color: var(--light);
+        }
+        
+        .contact-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #31a24c;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            border: 2px solid var(--card-bg);
+        }
+        
+        .contact-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            position: relative;
+        }
+        
+        .contact-name {
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .main-container {
+                grid-template-columns: 80px 1fr 250px;
+            }
+            
+            .sidebar-section:not(:first-child) {
+                display: none;
+            }
+            
+            .menu-item span {
+                display: none;
+            }
+            
+            .menu-item i {
+                margin-right: 0;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr 300px;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 0 10px;
+            }
+            
+            .right-sidebar {
+                display: none;
+            }
+            
+            .search-bar {
+                display: none;
+            }
+            
+            .nav-links a span {
+                display: none;
+            }
+            
+            .nav-links a {
+                padding: 10px;
+            }
+            
+            .nav-links a i {
+                margin-bottom: 0;
+            }
+            
+            .stories {
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">Social<span>Connect</span></a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search SocialConnect">
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#"><i>🏠</i><span>Home</span></a></li>
+                <li><a href="#" class="active"><i>👥</i><span>Friends</span></a></li>
+                <li><a href="#"><i>📺</i><span>Watch</span></a></li>
+                <li><a href="#"><i>🏪</i><span>Marketplace</span></a></li>
+                <li><a href="#"><i>🎮</i><span>Gaming</span></a></li>
+            </ul>
+            
+            <div class="user-menu">
+                <div class="user-avatar" style="background-color: #e4e6eb; display: flex; align-items: center; justify-content: center; font-size: 1.2em;">
+                    👤
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <a href="#" class="menu-item active">
+                    <i>👤</i>
+                    <span>John Doe</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i>🛡️</i>
+                    <span>COVID-19 Information Center</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i>👥</i>
+                    <span>Friends</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i>💬</i>
+                    <span>Messenger</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i>🏪</i>
+                    <span>Marketplace</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i>📺</i>
+                    <span>Watch</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i>📅</i>
+                    <span>Events</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i>⏰</i>
+                    <span>Memories</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i>💼</i>
+                    <span>Jobs</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Your Shortcuts</h3>
+                <div class="shortcut-item">
+                    <img src="https://via.placeholder.com/30" alt="Group" class="shortcut-avatar">
+                    <span>Web Developers Group</span>
+                </div>
+                <div class="shortcut-item">
+                    <img src="https://via.placeholder.com/30" alt="Group" class="shortcut-avatar">
+                    <span>Tech Enthusiasts</span>
+                </div>
+                <div class="shortcut-item">
+                    <img src="https://via.placeholder.com/30" alt="Group" class="shortcut-avatar">
+                    <span>Travel Lovers</span>
+                </div>
+                <div class="shortcut-item">
+                    <img src="https://via.placeholder.com/30" alt="Group" class="shortcut-avatar">
+                    <span>Food & Cooking</span>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Feed -->
+        <main class="content">
+            <!-- Stories -->
+            <section class="story-section">
+                <div class="stories">
+                    <div class="story upload">
+                        <i>+</i>
+                        <span>Create Story</span>
+                    </div>
+                    <div class="story">
+                        <img src="https://via.placeholder.com/100x180" alt="Story" class="story-image">
+                        <div class="story-user">Alex Johnson</div>
+                    </div>
+                    <div class="story">
+                        <img src="https://via.placeholder.com/100x180" alt="Story" class="story-image">
+                        <div class="story-user">Sarah Williams</div>
+                    </div>
+                    <div class="story">
+                        <img src="https://via.placeholder.com/100x180" alt="Story" class="story-image">
+                        <div class="story-user">Michael Chen</div>
+                    </div>
+                    <div class="story">
+                        <img src="https://via.placeholder.com/100x180" alt="Story" class="story-image">
+                        <div class="story-user">Emma Davis</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Create Post -->
+            <div class="create-post">
+                <div class="post-input">
+                    <img src="https://via.placeholder.com/40" alt="User" class="post-avatar">
+                    <input type="text" placeholder="What's on your mind, John?">
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i>📹</i>
+                        <span>Live Video</span>
+                    </div>
+                    <div class="post-action">
+                        <i>🖼️</i>
+                        <span>Photo/Video</span>
+                    </div>
+                    <div class="post-action">
+                        <i>😊</i>
+                        <span>Feeling/Activity</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post 1 -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://via.placeholder.com/40" alt="User" class="post-avatar">
+                        <div class="post-user-info">
+                            <h4>Sarah Williams</h4>
+                            <div class="post-time">2 hrs ago <i>🌍</i></div>
+                        </div>
+                    </div>
+                    <div class="post-more">⋯</div>
+                </div>
+                <div class="post-content">
+                    <p>Just finished my morning hike! The view was absolutely breathtaking. 🏞️ #NatureLover #WeekendVibes</p>
+                </div>
+                <img src="https://via.placeholder.com/600x400" alt="Hiking" class="post-image">
+                <div class="post-stats">
+                    <div>👍 128 likes</div>
+                    <div>💬 24 comments</div>
+                    <div>🔄 5 shares</div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i>👍</i>
+                        <span>Like</span>
+                    </div>
+                    <div class="post-action">
+                        <i>💬</i>
+                        <span>Comment</span>
+                    </div>
+                    <div class="post-action">
+                        <i>🔄</i>
+                        <span>Share</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post 2 -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://via.placeholder.com/40" alt="User" class="post-avatar">
+                        <div class="post-user-info">
+                            <h4>Tech News Daily</h4>
+                            <div class="post-time">5 hrs ago <i>🌍</i></div>
+                        </div>
+                    </div>
+                    <div class="post-more">⋯</div>
+                </div>
+                <div class="post-content">
+                    <p>🚀 Breaking: The new Quantum X smartphone breaks all performance records with its revolutionary chipset. Read more on our website! #TechNews #Innovation</p>
+                </div>
+                <div class="post-stats">
+                    <div>👍 542 likes</div>
+                    <div>💬 87 comments</div>
+                    <div>🔄 124 shares</div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i>👍</i>
+                        <span>Like</span>
+                    </div>
+                    <div class="post-action">
+                        <i>💬</i>
+                        <span>Comment</span>
+                    </div>
+                    <div class="post-action">
+                        <i>🔄</i>
+                        <span>Share</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post 3 -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://via.placeholder.com/40" alt="User" class="post-avatar">
+                        <div class="post-user-info">
+                            <h4>Alex Johnson</h4>
+                            <div class="post-time">Yesterday at 8:30 PM <i>👥</i></div>
+                        </div>
+                    </div>
+                    <div class="post-more">⋯</div>
+                </div>
+                <div class="post-content">
+                    <p>Just launched my new website! Check it out and let me know what you think. Huge thanks to everyone who supported me through this journey! 🙏</p>
+                    <p>👉 www.alexjohnson.dev</p>
+                </div>
+                <div class="post-stats">
+                    <div>👍 89 likes</div>
+                    <div>💬 14 comments</div>
+                    <div>🔄 7 shares</div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i>👍</i>
+                        <span>Like</span>
+                    </div>
+                    <div class="post-action">
+                        <i>💬</i>
+                        <span>Comment</span>
+                    </div>
+                    <div class="post-action">
+                        <i>🔄</i>
+                        <span>Share</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Sponsored</h3>
+                <div class="sponsor-item">
+                    <img src="https://via.placeholder.com/40" alt="Sponsor" class="sponsor-image">
+                    <div class="sponsor-info">
+                        <h4>Learn Web Development</h4>
+                        <p>codingacademy.com</p>
+                    </div>
+                </div>
+                <div class="sponsor-item">
+                    <img src="https://via.placeholder.com/40" alt="Sponsor" class="sponsor-image">
+                    <div class="sponsor-info">
+                        <h4>Premium Tech Gear</h4>
+                        <p>techstore.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="birthday-item">
+                    <div class="birthday-icon">🎂</div>
+                    <div class="birthday-info">
+                        <h4>Birthdays</h4>
+                        <p><strong>Michael Chen</strong> and <strong>2 others</strong> have birthdays today.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <h3 class="sidebar-title">Contacts</h3>
+                    <div class="contact-actions">
+                        <i>🔍</i>
+                        <i>⋮</i>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/35" alt="User" class="contact-avatar">
+                        <div class="contact-status"></div>
+                    </div>
+                    <span class="contact-name">Sarah Williams</span>
+                </div>
+                <div class="contact-item">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/35" alt="User" class="contact-avatar">
+                        <div class="contact-status"></div>
+                    </div>
+                    <span class="contact-name">Michael Chen</span>
+                </div>
+                <div class="contact-item">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/35" alt="User" class="contact-avatar">
+                        <div class="contact-status" style="background-color: #bdc3c9;"></div>
+                    </div>
+                    <span class="contact-name">Emma Davis</span>
+                </div>
+                <div class="contact-item">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/35" alt="User" class="contact-avatar">
+                        <div class="contact-status"></div>
+                    </div>
+                    <span class="contact-name">David Kim</span>
+                </div>
+                <div class="contact-item">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/35" alt="User" class="contact-avatar">
+                        <div class="contact-status" style="background-color: #bdc3c9;"></div>
+                    </div>
+                    <span class="contact-name">Jessica Lee</span>
+                </div>
+                <div class="contact-item">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/35" alt="User" class="contact-avatar">
+                        <div class="contact-status"></div>
+                    </div>
+                    <span class="contact-name">Ryan Park</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <script>
+        // Simple script to toggle like button
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeButtons = document.querySelectorAll('.post-action:first-child');
+            
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('liked');
+                    if (this.classList.contains('liked')) {
+                        this.innerHTML = '<i>👍</i><span>Liked</span>';
+                    } else {
+                        this.innerHTML = '<i>👍</i><span>Like</span>';
+                    }
+                });
+            });
+            
+            // Toggle comment button
+            const commentButtons = document.querySelectorAll('.post-action:nth-child(2)');
+            commentButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('commented');
+                });
+            });
+            
+            // Toggle share button
+            const shareButtons = document.querySelectorAll('.post-action:last-child');
+            shareButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('shared');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

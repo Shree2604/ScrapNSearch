@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Movies of 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .movie {
+            background: white;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+        }
+        .movie-poster {
+            width: 120px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        .movie-info {
+            flex: 1;
+        }
+        .movie-title {
+            font-size: 1.5em;
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        .movie-meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .rating {
+            display: inline-block;
+            background-color: #f1c40f;
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .genre {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .director, .cast {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        .cast span {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Top Movies of 2025</h1>
+        <p>Ranked by IMDB Ratings</p>
+    </div>
+
+    <div class="movie">
+        <img src="https://via.placeholder.com/120x180" alt="Eternal Echoes" class="movie-poster">
+        <div class="movie-info">
+            <h2 class="movie-title">1. Eternal Echoes</h2>
+            <div class="movie-meta">
+                <span class="rating">9.1/10</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>2h 38m</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>PG-13</span>
+            </div>
+            <div>
+                <span class="genre">Sci-Fi</span>
+                <span class="genre">Drama</span>
+                <span class="genre">Mystery</span>
+            </div>
+            <p class="director"><strong>Director:</strong> Christopher Nolan</p>
+            <p class="cast"><strong>Cast:</strong> <span>Tom Hardy</span>, <span>Ana de Armas</span>, <span>Idris Elba</span></p>
+            <p>In a future where memories can be revisited, a detective must solve a murder by reliving the victim's final days.</p>
+        </div>
+    </div>
+
+    <div class="movie">
+        <img src="https://via.placeholder.com/120x180" alt="The Last Voyage" class="movie-poster">
+        <div class="movie-info">
+            <h2 class="movie-title">2. The Last Voyage</h2>
+            <div class="movie-meta">
+                <span class="rating">8.9/10</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>2h 15m</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>PG-13</span>
+            </div>
+            <div>
+                <span class="genre">Adventure</span>
+                <span class="genre">Drama</span>
+            </div>
+            <p class="director"><strong>Director:</strong> Denis Villeneuve</p>
+            <p class="cast"><strong>Cast:</strong> <span>Timothée Chalamet</span>, <span>Florence Pugh</span>, <span>Oscar Isaac</span></p>
+            <p>A crew of astronauts embarks on humanity's first interstellar voyage to find a new home.</p>
+        </div>
+    </div>
+
+    <div class="movie">
+        <img src="https://via.placeholder.com/120x180" alt="Midnight Heist" class="movie-poster">
+        <div class="movie-info">
+            <h2 class="movie-title">3. Midnight Heist</h2>
+            <div class="movie-meta">
+                <span class="rating">8.7/10</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>2h 5m</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>R</span>
+            </div>
+            <div>
+                <span class="genre">Crime</span>
+                <span class="genre">Thriller</span>
+            </div>
+            <p class="director"><strong>Director:</strong> David Fincher</p>
+            <p class="cast"><strong>Cast:</strong> <span>Jake Gyllenhaal</span>, <span>Lakeith Stanfield</span>, <span>Zendaya</span></p>
+            <p>A master thief plans one final heist, but the job goes awry when he discovers his crew has been compromised.</p>
+        </div>
+    </div>
+
+    <div class="movie">
+        <img src="https://via.placeholder.com/120x180" alt="The Forgotten Kingdom" class="movie-poster">
+        <div class="movie-info">
+            <h2 class="movie-title">4. The Forgotten Kingdom</h2>
+            <div class="movie-meta">
+                <span class="rating">8.5/10</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>2h 22m</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>PG-13</span>
+            </div>
+            <div>
+                <span class="genre">Fantasy</span>
+                <span class="genre">Adventure</span>
+            </div>
+            <p class="director"><strong>Director:</strong> Patty Jenkins</p>
+            <p class="cast"><strong>Cast:</strong> <span>Gal Gadot</span>, <span>Henry Cavill</span>, <span>Letitia Wright</span></p>
+            <p>In a world where magic has been forgotten, a young woman discovers she is the heir to a powerful kingdom.</p>
+        </div>
+    </div>
+
+    <div class="movie">
+        <img src="https://via.placeholder.com/120x180" alt="The Last Laugh" class="movie-poster">
+        <div class="movie-info">
+            <h2 class="movie-title">5. The Last Laugh</h2>
+            <div class="movie-meta">
+                <span class="rating">8.3/10</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>1h 58m</span>
+                <span style="margin: 0 10px;">•</span>
+                <span>R</span>
+            </div>
+            <div>
+                <span class="genre">Comedy</span>
+                <span class="genre">Drama</span>
+            </div>
+            <p class="director"><strong>Director:</strong> Greta Gerwig</p>
+            <p class="cast"><strong>Cast:</strong> <span>Phoebe Waller-Bridge</span>, <span>Bill Hader</span>, <span>Awkwafina</span></p>
+            <p>A washed-up comedian gets one last shot at the big time, but her comeback tour takes unexpected turns.</p>
+        </div>
+    </div>
+</body>
+</html>
