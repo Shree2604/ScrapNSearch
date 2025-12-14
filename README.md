@@ -6,7 +6,6 @@
 
 > An interactive educational game designed to teach web scraping fundamentals through hands-on challenges using BeautifulSoup4.
 
----
 
 ## 🎯 Overview
 
@@ -20,7 +19,6 @@
 - Learn web scraping best practices
 - Develop problem-solving skills
 
----
 
 ## ✨ Features
 
@@ -31,7 +29,6 @@
 - **Educational**: Includes detailed solutions and explanations
 - **Extensible**: Easy to add custom challenges
 
----
 
 ## 🚀 Installation
 
@@ -61,15 +58,12 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
----
-
 ## 🎮 Quick Start
 
 1. **Choose a challenge level** from the `challenges/` directory
 2. **Read the HTML file** in the `data/` directory to understand the structure
 3. **Write your scraping script** to extract data and answer questions
 4. **Quote your answer** & Update .py file in your fork 
----
 
 ## 📊 Challenge Levels
 
@@ -82,13 +76,11 @@ pip install -r requirements.txt
 
 **Detailed challenge instructions**: See individual files in the [`challenges/`](challenges/) directory.
 
----
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on how to submit pull requests.
 
----
 
 ## 📄 License
 
