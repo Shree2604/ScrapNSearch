@@ -42,8 +42,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/scrape-guess-game.git
-cd scrape-guess-game
+git clone https://github.com/Shree/ScrapNSearch.git
+cd ScrapNSearch
 
 # Create virtual environment (recommended)
 python -m venv venv
@@ -76,10 +76,6 @@ pip install -r requirements.txt
 
 **Detailed challenge instructions**: See individual files in the [`challenges/`](challenges/) directory.
 
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on how to submit pull requests.
 
 
 ## 📄 License
